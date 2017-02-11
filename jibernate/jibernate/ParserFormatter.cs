@@ -55,7 +55,7 @@ namespace jibernate
 		/// </summary>
 		public static IList<PlaceholderValue> ParsePlaceholderValues(string text)
 		{
-			var parts = text.Split(new[] { ";:p0" }, StringSplitOptions.None);
+			var parts = text.Trim().Split(new[] { ";:p0" }, StringSplitOptions.None);
 			text = ":p0" + parts[1];
 
 			var values = new List<PlaceholderValue>();
@@ -109,6 +109,9 @@ namespace jibernate
 		/// </summary>
 		public static PlaceholderName ParsePlaceholderName(string placeholderText)
 		{
+			if (string.IsNullOrWhiteSpace(placeholderText))
+				return null;
+
 			var i = 0;
 			while (i < placeholderText.Length)
 			{
@@ -116,6 +119,7 @@ namespace jibernate
 					break;
 				i++;
 			}
+
 			i++;//skip :
 			i++;//skip p
 			var name = new PlaceholderName();
