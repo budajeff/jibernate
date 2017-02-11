@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jibernate", "jibernate\jibernate.csproj", "{C5B9227E-306F-41B9-BFDC-0AB6373FD399}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jibernateTests", "jibernateTests\jibernateTests.csproj", "{99ACFB89-BBCA-4AD8-9C5C-7E6E2AF61A5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5B9227E-306F-41B9-BFDC-0AB6373FD399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5B9227E-306F-41B9-BFDC-0AB6373FD399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5B9227E-306F-41B9-BFDC-0AB6373FD399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5B9227E-306F-41B9-BFDC-0AB6373FD399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99ACFB89-BBCA-4AD8-9C5C-7E6E2AF61A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99ACFB89-BBCA-4AD8-9C5C-7E6E2AF61A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99ACFB89-BBCA-4AD8-9C5C-7E6E2AF61A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99ACFB89-BBCA-4AD8-9C5C-7E6E2AF61A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

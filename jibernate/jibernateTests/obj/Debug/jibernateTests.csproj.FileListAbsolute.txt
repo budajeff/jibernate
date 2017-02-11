@@ -1,0 +1,7 @@
+C:\Users\jeff\git\jibernate\jibernate\jibernateTests\obj\Debug\jibernateTests.csprojResolveAssemblyReference.cache
+C:\Users\jeff\git\jibernate\jibernate\jibernateTests\bin\Debug\jibernateTests.dll
+C:\Users\jeff\git\jibernate\jibernate\jibernateTests\bin\Debug\jibernateTests.pdb
+C:\Users\jeff\git\jibernate\jibernate\jibernateTests\bin\Debug\jibernate.exe
+C:\Users\jeff\git\jibernate\jibernate\jibernateTests\bin\Debug\jibernate.pdb
+C:\Users\jeff\git\jibernate\jibernate\jibernateTests\obj\Debug\jibernateTests.dll
+C:\Users\jeff\git\jibernate\jibernate\jibernateTests\obj\Debug\jibernateTests.pdb
