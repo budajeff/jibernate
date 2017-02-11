@@ -142,7 +142,7 @@ namespace jibernate
 
 			foreach(var value in values)
 			{
-				sqlText = sqlText.Replace(value.DisplayName, value.Value);
+				sqlText = sqlText.Replace(value.DisplayName+" ", value.Value+" ");
 			}
 			sqlText.Trim();
 			return sqlText;

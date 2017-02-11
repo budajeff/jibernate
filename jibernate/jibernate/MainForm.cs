@@ -18,6 +18,7 @@ namespace jibernate
 		public MainForm()
 		{
 			InitializeComponent();
+			this._placeholderGrid.AutoGenerateColumns = false;
 		}
 
 		private void _placeholderGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -38,24 +39,41 @@ namespace jibernate
 		private void _getFromClipboardButton_Click(object sender, EventArgs e)
 		{
 			this._sourceTextBox.Text = Clipboard.GetText();
-
+			this._originalSourceText = Clipboard.GetText();
 			try
 			{
 				this._placeholderValues = ParserFormatter.ParsePlaceholderValues(this._sourceTextBox.Text);
 			}
-			catch(Exception)
+			catch(Exception ex)
 			{
-				MessageBox.Show("Could not parse clipboard text as an NHibernate.SQL log message.");
+				MessageBox.Show(
+					this,
+					"Could not parse clipboard text as an NHibernate.SQL log message." 
+					+ Environment.NewLine 
+					+ ex.Message,
+					"jibernate",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
 				return;
 			}
 
-			this._placeholderGrid.DataSource = new BindingSource { DataSource = _placeholderValues };
-			this._sqlTextBox.Text = ParserFormatter.FormatAsSql(this._sourceTextBox.Text, this._placeholderValues);
+			if (this._placeholderGrid.DataSource != null)
+			{
+				((BindingSource)this._placeholderGrid.DataSource).Clear();
+			}
+			else
+			{
+				this._placeholderGrid.DataSource = new BindingSource();
+			}
+			foreach (var item in this._placeholderValues)
+				((BindingSource)this._placeholderGrid.DataSource).Add(item);
+
+			this._sqlTextBox.Text = ParserFormatter.FormatAsSql(this._originalSourceText, this._placeholderValues);
 		}
 
 		private void _placeholderGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
 		{
-			this._sqlTextBox.Text = ParserFormatter.FormatAsSql(this._sourceTextBox.Text, this._placeholderValues);
+			this._sqlTextBox.Text = ParserFormatter.FormatAsSql(this._originalSourceText, this._placeholderValues);
 		}
 
 		private void _sentSqlToClipboardButton_Click(object sender, EventArgs e)

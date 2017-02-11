@@ -67,7 +67,7 @@
 			this._sourceTextBox.Location = new System.Drawing.Point(0, 118);
 			this._sourceTextBox.Name = "_sourceTextBox";
 			this._sourceTextBox.ReadOnly = true;
-			this._sourceTextBox.Size = new System.Drawing.Size(290, 333);
+			this._sourceTextBox.Size = new System.Drawing.Size(326, 333);
 			this._sourceTextBox.TabIndex = 0;
 			this._sourceTextBox.Text = "";
 			// 
@@ -77,7 +77,7 @@
 			this._sqlTextBox.Location = new System.Drawing.Point(0, 117);
 			this._sqlTextBox.Name = "_sqlTextBox";
 			this._sqlTextBox.ReadOnly = true;
-			this._sqlTextBox.Size = new System.Drawing.Size(341, 334);
+			this._sqlTextBox.Size = new System.Drawing.Size(346, 334);
 			this._sqlTextBox.TabIndex = 1;
 			this._sqlTextBox.Text = "";
 			// 
@@ -95,7 +95,7 @@
 			this._placeholderGrid.Name = "_placeholderGrid";
 			this._placeholderGrid.RowHeadersVisible = false;
 			this._placeholderGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-			this._placeholderGrid.Size = new System.Drawing.Size(213, 335);
+			this._placeholderGrid.Size = new System.Drawing.Size(351, 335);
 			this._placeholderGrid.TabIndex = 2;
 			this._placeholderGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this._placeholderGrid_CellEndEdit);
 			this._placeholderGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._placeholderGrid_CellFormatting);
@@ -130,8 +130,8 @@
 			// _mainSplitContainer.Panel2
 			// 
 			this._mainSplitContainer.Panel2.Controls.Add(this._textEditorsSplitContainer);
-			this._mainSplitContainer.Size = new System.Drawing.Size(852, 451);
-			this._mainSplitContainer.SplitterDistance = 213;
+			this._mainSplitContainer.Size = new System.Drawing.Size(1031, 451);
+			this._mainSplitContainer.SplitterDistance = 351;
 			this._mainSplitContainer.TabIndex = 1;
 			// 
 			// _placeholdersTopPanel
@@ -143,7 +143,7 @@
 			this._placeholdersTopPanel.Location = new System.Drawing.Point(0, 0);
 			this._placeholdersTopPanel.Name = "_placeholdersTopPanel";
 			this._placeholdersTopPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 68);
-			this._placeholdersTopPanel.Size = new System.Drawing.Size(213, 116);
+			this._placeholdersTopPanel.Size = new System.Drawing.Size(351, 116);
 			this._placeholdersTopPanel.TabIndex = 4;
 			// 
 			// label2
@@ -183,8 +183,8 @@
 			// 
 			this._textEditorsSplitContainer.Panel2.Controls.Add(this._sqlTextBox);
 			this._textEditorsSplitContainer.Panel2.Controls.Add(this._sqlTopPanel);
-			this._textEditorsSplitContainer.Size = new System.Drawing.Size(635, 451);
-			this._textEditorsSplitContainer.SplitterDistance = 290;
+			this._textEditorsSplitContainer.Size = new System.Drawing.Size(676, 451);
+			this._textEditorsSplitContainer.SplitterDistance = 326;
 			this._textEditorsSplitContainer.TabIndex = 0;
 			// 
 			// panel1
@@ -197,7 +197,7 @@
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
 			this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-			this.panel1.Size = new System.Drawing.Size(290, 118);
+			this.panel1.Size = new System.Drawing.Size(326, 118);
 			this.panel1.TabIndex = 2;
 			// 
 			// _nHibernateTextInstructionsLabel
@@ -230,7 +230,7 @@
 			this._getFromClipboardButton.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this._getFromClipboardButton.Location = new System.Drawing.Point(0, 84);
 			this._getFromClipboardButton.Name = "_getFromClipboardButton";
-			this._getFromClipboardButton.Size = new System.Drawing.Size(290, 24);
+			this._getFromClipboardButton.Size = new System.Drawing.Size(326, 24);
 			this._getFromClipboardButton.TabIndex = 0;
 			this._getFromClipboardButton.Text = "Get nHibernate Text from Clipboard";
 			this._getFromClipboardButton.UseVisualStyleBackColor = true;
@@ -246,7 +246,7 @@
 			this._sqlTopPanel.Location = new System.Drawing.Point(0, 0);
 			this._sqlTopPanel.Name = "_sqlTopPanel";
 			this._sqlTopPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-			this._sqlTopPanel.Size = new System.Drawing.Size(341, 117);
+			this._sqlTopPanel.Size = new System.Drawing.Size(346, 117);
 			this._sqlTopPanel.TabIndex = 3;
 			// 
 			// label1
@@ -279,7 +279,7 @@
 			this._sentSqlToClipboardButton.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this._sentSqlToClipboardButton.Location = new System.Drawing.Point(0, 84);
 			this._sentSqlToClipboardButton.Name = "_sentSqlToClipboardButton";
-			this._sentSqlToClipboardButton.Size = new System.Drawing.Size(341, 23);
+			this._sentSqlToClipboardButton.Size = new System.Drawing.Size(346, 23);
 			this._sentSqlToClipboardButton.TabIndex = 0;
 			this._sentSqlToClipboardButton.Text = "Send SQL to Clipboard";
 			this._sentSqlToClipboardButton.UseVisualStyleBackColor = true;
@@ -289,7 +289,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(852, 451);
+			this.ClientSize = new System.Drawing.Size(1031, 451);
 			this.Controls.Add(this._mainSplitContainer);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
