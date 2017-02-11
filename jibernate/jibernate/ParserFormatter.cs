@@ -56,7 +56,7 @@ namespace jibernate
 		public static IList<PlaceholderValue> ParsePlaceholderValues(string text)
 		{
 			var parts = text.Split(new[] { ";:p0" }, StringSplitOptions.None);
-			text = parts[1];
+			text = ":p0" + parts[1];
 
 			var values = new List<PlaceholderValue>();
 			Int32 i = 0;

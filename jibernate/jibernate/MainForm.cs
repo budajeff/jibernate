@@ -46,19 +46,21 @@ namespace jibernate
 			catch(Exception)
 			{
 				MessageBox.Show("Could not parse clipboard text as an NHibernate.SQL log message.");
+				return;
 			}
 
 			this._placeholderGrid.DataSource = new BindingSource { DataSource = _placeholderValues };
-		}
-
-		private void _sendSqlToClipboard_Click(object sender, EventArgs e)
-		{
-			Clipboard.SetText(this._sqlTextBox.Text);
+			this._sqlTextBox.Text = ParserFormatter.FormatAsSql(this._sourceTextBox.Text, this._placeholderValues);
 		}
 
 		private void _placeholderGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
 		{
 			this._sqlTextBox.Text = ParserFormatter.FormatAsSql(this._sourceTextBox.Text, this._placeholderValues);
+		}
+
+		private void _sentSqlToClipboardButton_Click(object sender, EventArgs e)
+		{
+			Clipboard.SetText(this._sqlTextBox.Text);
 		}
 	}
 }
