@@ -140,9 +140,10 @@ namespace jibernate
 			//remove possible prefixes
 			sqlText = sqlText.Replace("NHibernate.SQL: DEBUG -", "").Trim();
 
-			foreach(var value in values)
+			//replace placeholders in descending order so double digit placeholders don't get replaced by single digit placeholder values
+			foreach(var value in values.OrderByDescending(value => value.Name.Index))
 			{
-				sqlText = sqlText.Replace(value.DisplayName+" ", value.Value+" ");
+				sqlText = sqlText.Replace(value.DisplayName, value.Value);
 			}
 			sqlText.Trim();
 			return sqlText;
