@@ -42,7 +42,7 @@ from
 			  then arov.entry_date else null end) as newest_invoice_date,
 		max(arov.entry_date) as newest_entry_date
 	from
-		Client_View as cv
+		some_view as cv
 	inner join 
 		accounts_receivable_open_view as arov
 		on cv.client_id = arov.client_id
@@ -75,6 +75,22 @@ ORDER BY
 
 			var sql = ParserFormatter.FormatAsSql(input, ParserFormatter.ParsePlaceholderValues(input));
 			Assert.IsNotNull(sql);
+		}
+
+		[TestMethod]
+		public void CanParseAndFormatSelectOnePlaceholder()
+		{
+			const string text = @"NHibernate.SQL: DEBUG - SELECT contactema0_.CONTACT_ID as CONTACT13_15_1_, contactema0_.CONTACT_EMAIL_ID as CONTACT1_15_1_, contactema0_.CONTACT_EMAIL_ID as CONTACT1_15_0_, contactema0_.CREATED as CREATED2_15_0_, contactema0_.CHANGED as CHANGED3_15_0_, contactema0_.DELETED as DELETED4_15_0_, contactema0_.IS_DELETED as IS5_15_0_, contactema0_.CREATED_BY__CONTACT_ID as CREATED6_15_0_, contactema0_.CHANGED_BY__CONTACT_ID as CHANGED7_15_0_, contactema0_.EMAIL_ADDRESS as EMAIL8_15_0_, contactema0_.CONTACT_EMAIL_TYPE_ID as CONTACT9_15_0_, contactema0_.EMAIL_TYPE_SPECIFIED as EMAIL10_15_0_, contactema0_.SORT_ORDER as SORT11_15_0_, contactema0_.IS_PRIMARY as IS12_15_0_, contactema0_.CONTACT_ID as CONTACT13_15_0_ FROM SOME_TABLE contactema0_ WHERE  (contactema0_.IS_DELETED=FALSE) and contactema0_.CONTACT_ID=:p0;:p0 = 'B04712F663BF4FF0A6F5BC93A12FDC6C' [Type: String (0:0:0)]";
+
+			var values = ParserFormatter.ParsePlaceholderValues(text);
+			Assert.IsNotNull(values);
+			Assert.AreEqual(1, values.Count);
+			var value = values[0];
+			Assert.AreEqual("'B04712F663BF4FF0A6F5BC93A12FDC6C'", value.Value);
+			Assert.AreEqual(":p0", value.DisplayName);
+			var sql = ParserFormatter.FormatAsSql(text, values);
+			const string expectedSql = @"SELECT contactema0_.CONTACT_ID as CONTACT13_15_1_, contactema0_.CONTACT_EMAIL_ID as CONTACT1_15_1_, contactema0_.CONTACT_EMAIL_ID as CONTACT1_15_0_, contactema0_.CREATED as CREATED2_15_0_, contactema0_.CHANGED as CHANGED3_15_0_, contactema0_.DELETED as DELETED4_15_0_, contactema0_.IS_DELETED as IS5_15_0_, contactema0_.CREATED_BY__CONTACT_ID as CREATED6_15_0_, contactema0_.CHANGED_BY__CONTACT_ID as CHANGED7_15_0_, contactema0_.EMAIL_ADDRESS as EMAIL8_15_0_, contactema0_.CONTACT_EMAIL_TYPE_ID as CONTACT9_15_0_, contactema0_.EMAIL_TYPE_SPECIFIED as EMAIL10_15_0_, contactema0_.SORT_ORDER as SORT11_15_0_, contactema0_.IS_PRIMARY as IS12_15_0_, contactema0_.CONTACT_ID as CONTACT13_15_0_ FROM SOME_TABLE contactema0_ WHERE  (contactema0_.IS_DELETED=FALSE) and contactema0_.CONTACT_ID='B04712F663BF4FF0A6F5BC93A12FDC6C'";
+			Assert.AreEqual(expectedSql, sql);
 		}
 	}
 }
