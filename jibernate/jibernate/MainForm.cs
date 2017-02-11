@@ -38,7 +38,16 @@ namespace jibernate
 		private void _getFromClipboardButton_Click(object sender, EventArgs e)
 		{
 			this._sourceTextBox.Text = Clipboard.GetText();
-			this._placeholderValues = ParserFormatter.ParsePlaceholderValues(this._sourceTextBox.Text);
+
+			try
+			{
+				this._placeholderValues = ParserFormatter.ParsePlaceholderValues(this._sourceTextBox.Text);
+			}
+			catch(Exception)
+			{
+				MessageBox.Show("Could not parse clipboard text as an NHibernate.SQL log message.");
+			}
+
 			this._placeholderGrid.DataSource = new BindingSource { DataSource = _placeholderValues };
 		}
 

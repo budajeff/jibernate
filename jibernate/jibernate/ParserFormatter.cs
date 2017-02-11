@@ -55,6 +55,9 @@ namespace jibernate
 		/// </summary>
 		public static IList<PlaceholderValue> ParsePlaceholderValues(string text)
 		{
+			var parts = text.Split(new[] { ";:p0" }, StringSplitOptions.None);
+			text = parts[1];
+
 			var values = new List<PlaceholderValue>();
 			Int32 i = 0;
 			while (i < text.Length)
@@ -107,8 +110,10 @@ namespace jibernate
 		public static PlaceholderName ParsePlaceholderName(string placeholderText)
 		{
 			var i = 0;
-			while (i < placeholderText.Length && placeholderText[i] != ':')
+			while (i < placeholderText.Length)
 			{
+				if (placeholderText[i] == ':' && placeholderText[i + 1] == 'p')
+					break;
 				i++;
 			}
 			i++;//skip :

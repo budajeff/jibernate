@@ -8,7 +8,7 @@ namespace jibernateTests
 	public class ParserFormatterTests
 	{
 		[TestMethod]
-		public void TestMethod1()
+		public void CanParseSevenPlaceholders()
 		{
 			const string input = @"
 NHibernate.SQL: DEBUG - SELECT this_.GROUP_BY__CLIENT_ID as GROUP1_101_0_, this_.COMPANY_ID as COMPANY2_101_0_, this_.CLIENT__CODE as CLIENT3_101_0_, this_.CLIENT__NAME as CLIENT4_101_0_, this_.PARTNER__EMPLOYEE_ID as PARTNER5_101_0_, this_.PARTNER__EMPLOYEE__CODE as PARTNER6_101_0_, this_.SORT_TIMESTAMP as SORT7_101_0_, this_.posted_open_amount as posted8_101_0_, this_.oldest_balance_days as oldest9_101_0_, FALSE as formula177_0_ FROM ( select  
@@ -66,6 +66,10 @@ ORDER BY
 
 			var values = ParserFormatter.ParsePlaceholderValues(@";:p0 = '1999-01-01' [Type: String (0:0:0)], :p1 = False [Type: Boolean (0:0:0)], :p2 = '1999-01-01' [Type: String (0:0:0)], :p3 = False [Type: Boolean (0:0:0)], :p4 = 5 [Type: Int32 (0:0:0)], :p5 = '58F88EA5D5604750B5B6F82E930AADAC' [Type: String (0:0:0)], :p6 = 0 [Type: Int32 (0:0:0)]");
 			Assert.IsNotNull(values);
+			Assert.AreEqual(7, values.Count);
+
+			var v1 = values[0];
+			Assert.AreEqual(v1.DisplayName, ":p0");
 			//var result = ParserFormatter.Parse(input);
 			//Assert.IsNotNull(result);
 
