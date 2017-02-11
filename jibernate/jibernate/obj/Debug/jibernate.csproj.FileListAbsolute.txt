@@ -1,9 +1,0 @@
-C:\Users\jeff\git\jibernate\jibernate\jibernate\bin\Debug\jibernate.exe.config
-C:\Users\jeff\git\jibernate\jibernate\jibernate\bin\Debug\jibernate.exe
-C:\Users\jeff\git\jibernate\jibernate\jibernate\bin\Debug\jibernate.pdb
-C:\Users\jeff\git\jibernate\jibernate\jibernate\obj\Debug\jibernate.csprojResolveAssemblyReference.cache
-C:\Users\jeff\git\jibernate\jibernate\jibernate\obj\Debug\jibernate.Properties.Resources.resources
-C:\Users\jeff\git\jibernate\jibernate\jibernate\obj\Debug\jibernate.csproj.GenerateResource.Cache
-C:\Users\jeff\git\jibernate\jibernate\jibernate\obj\Debug\jibernate.exe
-C:\Users\jeff\git\jibernate\jibernate\jibernate\obj\Debug\jibernate.pdb
-C:\Users\jeff\git\jibernate\jibernate\jibernate\obj\Debug\jibernate.MainForm.resources
