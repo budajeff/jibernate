@@ -96,5 +96,10 @@ namespace jibernate
 		{
 			Clipboard.SetText(this._sqlTextBoxSc.Text);
 		}
+
+		private void _sqlTextBoxSc_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
