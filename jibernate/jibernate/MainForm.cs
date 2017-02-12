@@ -27,12 +27,12 @@ namespace jibernate
 				sc.StyleClearAll();
 				sc.Lexer = Lexer.Sql;
 				sc.Styles[Style.Sql.Word].ForeColor = Color.Blue;
-				sc.Styles[Style.Sql.Word].Bold = true;
-				sc.Styles[Style.Sql.Number].ForeColor = Color.DarkOrange;
+				sc.Styles[Style.Sql.String].ForeColor = Color.Blue;
+				sc.Styles[Style.Sql.Number].ForeColor = Color.Green;
+				sc.Styles[Style.Sql.Character].ForeColor = Color.Green;
 				sc.Styles[Style.Sql.Operator].ForeColor = Color.Blue;
-				sc.Styles[Style.Sql.Comment].ForeColor = Color.Green;
-				sc.Styles[Style.Sql.CommentLine].ForeColor = Color.Green;
-				sc.SetKeywords(0, "select from where having order by group by asc desc");
+				sc.Styles[Style.Sql.QuotedIdentifier].ForeColor = Color.Blue;
+				sc.SetKeywords(0, "select from where having order by group by asc desc case when then else end inner join left outer on in some not and or sum");
 			}
 		}
 
