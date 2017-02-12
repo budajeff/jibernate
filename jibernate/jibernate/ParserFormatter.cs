@@ -55,6 +55,9 @@ namespace jibernate
 		/// </summary>
 		public static IList<PlaceholderValue> ParsePlaceholderValues(string text)
 		{
+			if (string.IsNullOrWhiteSpace(text))
+				return new List<PlaceholderValue>();
+
 			var parts = text.Trim().Split(new[] { ";:p0" }, StringSplitOptions.None);
 			text = ":p0" + parts[1];
 
@@ -78,6 +81,8 @@ namespace jibernate
 		public static PlaceholderValue ParsePlaceholderValue(string text)
 		{
 			var placeholderValue = new PlaceholderValue { Name = ParsePlaceholderName(text) };
+			if (placeholderValue.Name == null)//no placeholder found in the given text
+				return null;
 			Int32 i = placeholderValue.Name.SourceText.Length;
 			while (text[i] != '=')
 			{
@@ -109,7 +114,7 @@ namespace jibernate
 		/// </summary>
 		public static PlaceholderName ParsePlaceholderName(string placeholderText)
 		{
-			if (string.IsNullOrWhiteSpace(placeholderText))
+			if (string.IsNullOrWhiteSpace(placeholderText) || placeholderText.Length < 3)//min length of placeholder text
 				return null;
 
 			var i = 0;
@@ -134,6 +139,9 @@ namespace jibernate
 
 		public static string FormatAsSql(string nHibernateText, IList<PlaceholderValue> values)
 		{
+			if (values == null)
+				return "";
+
 			var parts = nHibernateText.Split(new []{";:p0"}, StringSplitOptions.None);
 			var sqlText = parts[0];
 			
@@ -147,6 +155,27 @@ namespace jibernate
 			}
 			sqlText.Trim();
 			return sqlText;
+		}
+
+		public static string PrettyPrintSql(string sqlText)
+		{
+			var words = sqlText.Split(new []{' ', '\t'});
+			const string keywords = "select from where having order group join ,"; 
+			var majorKeywords = keywords.Split(' ').Concat(keywords.ToUpperInvariant().Split(' '));
+			
+			var formattedSql = string.Empty;
+			foreach(var word in words)
+			{
+				if(majorKeywords.Contains(word))
+				{
+					formattedSql += Environment.NewLine + Environment.NewLine + word + " ";
+				}
+				else
+				{
+					formattedSql += word + " ";
+				}
+			}
+			return formattedSql;
 		}
 	}
 }

@@ -8,6 +8,17 @@ namespace jibernateTests
 	public class ParserFormatterTests
 	{
 		[TestMethod]
+		public void CanParseFormatSmallLog()
+		{ 
+			const string input = @"NHibernate.SQL: DEBUG - SELECT ID as y0_ from a_table as t where t.ID > :p0;:p0 = 0 [Type: Decimal (0:0:0)];";
+			var values = ParserFormatter.ParsePlaceholderValues(input);
+			Assert.IsNotNull(values);
+			Assert.AreEqual(1, values.Count);
+			var sql = ParserFormatter.FormatAsSql(input, values);
+			Assert.AreEqual(@"SELECT ID as y0_ from a_table as t where t.ID > 0", sql);
+		}
+
+		[TestMethod]
 		public void CanParseDoubleDigitPlaceholders()
 		{
 			const string input = @"NHibernate.SQL: DEBUG - SELECT tealias1_.TIME_AND_EXPENSE_ID as y0_, sum((case when this_.BILLED_AMOUNT > :p0 then :p1 else :p2 end)) as y1_ FROM INVOICE_DETAIL this_ inner join ACCOUNTS_RECEIVABLE aralias2_ on this_.ACCOUNTS_RECEIVABLE_ID=aralias2_.ACCOUNTS_RECEIVABLE_ID inner join TIME_AND_EXPENSE tealias1_ on this_.TIME_AND_EXPENSE_ID=tealias1_.TIME_AND_EXPENSE_ID WHERE :p3 = tealias1_.COMPANY_ID and (this_.IS_DELETED = :p4 and aralias2_.IS_DELETED = :p5) and not (:p6 = aralias2_.ACCOUNTS_RECEIVABLE_SUBTYPE_ID) and :p7 = tealias1_.TIME_AND_EXPENSE_TYPE_ID and (tealias1_.TIME_AND_EXPENSE_ID in (:p8)) GROUP BY tealias1_.TIME_AND_EXPENSE_ID HAVING not (:p9 = sum((case when this_.BILLED_AMOUNT > :p10 then :p11 else :p12 end)));:p0 = 0 [Type: Decimal (0:0:0)], :p1 = 1 [Type: Int32 (0:0:0)], :p2 = 0 [Type: Int32 (0:0:0)], :p3 = '5B80623B94F848AFA6B691EFAAEE4A47' [Type: String (0:0:0)], :p4 = False [Type: Boolean (0:0:0)], :p5 = False [Type: Boolean (0:0:0)], :p6 = 'PARTIALINVOICE' [Type: String (0:0:0)], :p7 = 'PROGRESSBILLING' [Type: String (0:0:0)], :p8 = '459A4CE196F745DD92C9C81F31BC0CE7' [Type: String (0:0:0)], :p9 = 1 [Type: Int32 (0:0:0)], :p10 = 0 [Type: Decimal (0:0:0)], :p11 = 1 [Type: Int32 (0:0:0)], :p12 = 0 [Type: Int32 (0:0:0)]";

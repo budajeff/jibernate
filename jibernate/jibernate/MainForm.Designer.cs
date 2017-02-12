@@ -42,10 +42,11 @@
 			this._nHibernateTextInstructionsLabel = new System.Windows.Forms.Label();
 			this._nHibernateTextLabel = new System.Windows.Forms.Label();
 			this._getFromClipboardButton = new System.Windows.Forms.Button();
+			this._sqlTextBoxSc = new ScintillaNET.Scintilla();
 			this._sqlTopPanel = new System.Windows.Forms.Panel();
+			this._prettyPrintButton = new System.Windows.Forms.Button();
 			this._sqlTopLabel = new System.Windows.Forms.Label();
 			this._sentSqlToClipboardButton = new System.Windows.Forms.Button();
-			this._sqlTextBoxSc = new ScintillaNET.Scintilla();
 			((System.ComponentModel.ISupportInitialize)(this._placeholderGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this._mainSplitContainer)).BeginInit();
 			this._mainSplitContainer.Panel1.SuspendLayout();
@@ -174,6 +175,7 @@
 			this._sourceTextBoxSc.Name = "_sourceTextBoxSc";
 			this._sourceTextBoxSc.Size = new System.Drawing.Size(694, 204);
 			this._sourceTextBoxSc.TabIndex = 3;
+			this._sourceTextBoxSc.TextChanged += new System.EventHandler(this._sourceTextBoxSc_TextChanged);
 			// 
 			// panel1
 			// 
@@ -195,10 +197,9 @@
 			this._nHibernateTextInstructionsLabel.Location = new System.Drawing.Point(0, 30);
 			this._nHibernateTextInstructionsLabel.Name = "_nHibernateTextInstructionsLabel";
 			this._nHibernateTextInstructionsLabel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-			this._nHibernateTextInstructionsLabel.Size = new System.Drawing.Size(409, 23);
+			this._nHibernateTextInstructionsLabel.Size = new System.Drawing.Size(323, 23);
 			this._nHibernateTextInstructionsLabel.TabIndex = 2;
-			this._nHibernateTextInstructionsLabel.Text = "Copy a NHibernate.SQL log message into your clipboard, then press the button belo" +
-    "w";
+			this._nHibernateTextInstructionsLabel.Text = "Copy a log message into the clipboard, then press the button below";
 			// 
 			// _nHibernateTextLabel
 			// 
@@ -223,9 +224,18 @@
 			this._getFromClipboardButton.UseVisualStyleBackColor = true;
 			this._getFromClipboardButton.Click += new System.EventHandler(this._getFromClipboardButton_Click);
 			// 
+			// _sqlTextBoxSc
+			// 
+			this._sqlTextBoxSc.Dock = System.Windows.Forms.DockStyle.Fill;
+			this._sqlTextBoxSc.Location = new System.Drawing.Point(0, 74);
+			this._sqlTextBoxSc.Name = "_sqlTextBoxSc";
+			this._sqlTextBoxSc.Size = new System.Drawing.Size(694, 205);
+			this._sqlTextBoxSc.TabIndex = 4;
+			// 
 			// _sqlTopPanel
 			// 
 			this._sqlTopPanel.AutoSize = true;
+			this._sqlTopPanel.Controls.Add(this._prettyPrintButton);
 			this._sqlTopPanel.Controls.Add(this._sqlTopLabel);
 			this._sqlTopPanel.Controls.Add(this._sentSqlToClipboardButton);
 			this._sqlTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -234,6 +244,16 @@
 			this._sqlTopPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
 			this._sqlTopPanel.Size = new System.Drawing.Size(694, 74);
 			this._sqlTopPanel.TabIndex = 3;
+			// 
+			// _prettyPrintButton
+			// 
+			this._prettyPrintButton.Location = new System.Drawing.Point(131, 37);
+			this._prettyPrintButton.Name = "_prettyPrintButton";
+			this._prettyPrintButton.Size = new System.Drawing.Size(75, 23);
+			this._prettyPrintButton.TabIndex = 2;
+			this._prettyPrintButton.Text = "Pretty Print";
+			this._prettyPrintButton.UseVisualStyleBackColor = true;
+			this._prettyPrintButton.Click += new System.EventHandler(this._prettyPrintButton_Click);
 			// 
 			// _sqlTopLabel
 			// 
@@ -257,15 +277,6 @@
 			this._sentSqlToClipboardButton.Text = "Copy SQL to Clipboard";
 			this._sentSqlToClipboardButton.UseVisualStyleBackColor = true;
 			this._sentSqlToClipboardButton.Click += new System.EventHandler(this._sentSqlToClipboardButton_Click);
-			// 
-			// _sqlTextBoxSc
-			// 
-			this._sqlTextBoxSc.Dock = System.Windows.Forms.DockStyle.Fill;
-			this._sqlTextBoxSc.Location = new System.Drawing.Point(0, 74);
-			this._sqlTextBoxSc.Name = "_sqlTextBoxSc";
-			this._sqlTextBoxSc.Size = new System.Drawing.Size(694, 205);
-			this._sqlTextBoxSc.TabIndex = 4;
-			this._sqlTextBoxSc.Click += new System.EventHandler(this._sqlTextBoxSc_Click);
 			// 
 			// MainForm
 			// 
@@ -318,6 +329,7 @@
 		private System.Windows.Forms.Button _sentSqlToClipboardButton;
 		private ScintillaNET.Scintilla _sourceTextBoxSc;
 		private ScintillaNET.Scintilla _sqlTextBoxSc;
+		private System.Windows.Forms.Button _prettyPrintButton;
 	}
 }
 

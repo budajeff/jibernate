@@ -14,7 +14,6 @@ namespace jibernate
 	public partial class MainForm : Form
 	{
 		IList<PlaceholderValue> _placeholderValues;
-		string _originalSourceText;
 
 		public MainForm()
 		{
@@ -54,22 +53,37 @@ namespace jibernate
 		private void _getFromClipboardButton_Click(object sender, EventArgs e)
 		{
 			this._sourceTextBoxSc.Text = Clipboard.GetText();
-			this._originalSourceText = Clipboard.GetText();
-			this._sourceTextBoxSc.Text = Clipboard.GetText();
+		}
+
+		private void _placeholderGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+		{
+			this._sqlTextBoxSc.Text = ParserFormatter.FormatAsSql(this._sourceTextBoxSc.Text, this._placeholderValues);
+		}
+
+		private void _sentSqlToClipboardButton_Click(object sender, EventArgs e)
+		{
+			Clipboard.SetText(this._sqlTextBoxSc.Text);
+		}
+
+		private void _prettyPrintButton_Click(object sender, EventArgs e)
+		{
+			this._sqlTextBoxSc.Text = ParserFormatter.PrettyPrintSql(this._sqlTextBoxSc.Text);
+		}
+
+		private void _sourceTextBoxSc_TextChanged(object sender, EventArgs e)
+		{
+			this.Reparse();
+		}
+
+		private void Reparse()
+		{
 			try
 			{
 				this._placeholderValues = ParserFormatter.ParsePlaceholderValues(this._sourceTextBoxSc.Text);
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
-				MessageBox.Show(
-					this,
-					"Could not parse clipboard text as an NHibernate.SQL log message." 
-					+ Environment.NewLine 
-					+ ex.Message,
-					"jibernate",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
+				this._sqlTextBoxSc.Text = "Error: Could not parse clipboard text as an NHibernate.SQL log message.";
 				return;
 			}
 
@@ -84,22 +98,7 @@ namespace jibernate
 			foreach (var item in this._placeholderValues)
 				((BindingSource)this._placeholderGrid.DataSource).Add(item);
 
-			this._sqlTextBoxSc.Text = ParserFormatter.FormatAsSql(this._originalSourceText, this._placeholderValues);
-		}
-
-		private void _placeholderGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-		{
-			this._sqlTextBoxSc.Text = ParserFormatter.FormatAsSql(this._originalSourceText, this._placeholderValues);
-		}
-
-		private void _sentSqlToClipboardButton_Click(object sender, EventArgs e)
-		{
-			Clipboard.SetText(this._sqlTextBoxSc.Text);
-		}
-
-		private void _sqlTextBoxSc_Click(object sender, EventArgs e)
-		{
-
+			this._sqlTextBoxSc.Text = ParserFormatter.FormatAsSql(this._sourceTextBoxSc.Text, this._placeholderValues);
 		}
 	}
 }
