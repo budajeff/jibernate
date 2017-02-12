@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScintillaNET;
 
 namespace jibernate
 {
@@ -19,6 +20,20 @@ namespace jibernate
 		{
 			InitializeComponent();
 			this._placeholderGrid.AutoGenerateColumns = false;
+
+			foreach (var sc in new[] {this._sourceTextBoxSc, this._sqlTextBoxSc })
+			{
+				sc.WrapMode = WrapMode.Whitespace;
+				sc.StyleClearAll();
+				sc.Lexer = Lexer.Sql;
+				sc.Styles[Style.Sql.Word].ForeColor = Color.Blue;
+				sc.Styles[Style.Sql.Word].Bold = true;
+				sc.Styles[Style.Sql.Number].ForeColor = Color.DarkOrange;
+				sc.Styles[Style.Sql.Operator].ForeColor = Color.Blue;
+				sc.Styles[Style.Sql.Comment].ForeColor = Color.Green;
+				sc.Styles[Style.Sql.CommentLine].ForeColor = Color.Green;
+				sc.SetKeywords(0, "select from where having order by group by asc desc");
+			}
 		}
 
 		private void _placeholderGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -38,11 +53,12 @@ namespace jibernate
 
 		private void _getFromClipboardButton_Click(object sender, EventArgs e)
 		{
-			this._sourceTextBox.Text = Clipboard.GetText();
+			this._sourceTextBoxSc.Text = Clipboard.GetText();
 			this._originalSourceText = Clipboard.GetText();
+			this._sourceTextBoxSc.Text = Clipboard.GetText();
 			try
 			{
-				this._placeholderValues = ParserFormatter.ParsePlaceholderValues(this._sourceTextBox.Text);
+				this._placeholderValues = ParserFormatter.ParsePlaceholderValues(this._sourceTextBoxSc.Text);
 			}
 			catch(Exception ex)
 			{
@@ -68,17 +84,17 @@ namespace jibernate
 			foreach (var item in this._placeholderValues)
 				((BindingSource)this._placeholderGrid.DataSource).Add(item);
 
-			this._sqlTextBox.Text = ParserFormatter.FormatAsSql(this._originalSourceText, this._placeholderValues);
+			this._sqlTextBoxSc.Text = ParserFormatter.FormatAsSql(this._originalSourceText, this._placeholderValues);
 		}
 
 		private void _placeholderGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
 		{
-			this._sqlTextBox.Text = ParserFormatter.FormatAsSql(this._originalSourceText, this._placeholderValues);
+			this._sqlTextBoxSc.Text = ParserFormatter.FormatAsSql(this._originalSourceText, this._placeholderValues);
 		}
 
 		private void _sentSqlToClipboardButton_Click(object sender, EventArgs e)
 		{
-			Clipboard.SetText(this._sqlTextBox.Text);
+			Clipboard.SetText(this._sqlTextBoxSc.Text);
 		}
 	}
 }

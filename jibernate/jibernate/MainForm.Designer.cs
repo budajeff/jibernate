@@ -29,8 +29,6 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			this._sourceTextBox = new System.Windows.Forms.RichTextBox();
-			this._sqlTextBox = new System.Windows.Forms.RichTextBox();
 			this._placeholderGrid = new System.Windows.Forms.DataGridView();
 			this._placeholderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this._valueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,6 +37,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this._textEditorsSplitContainer = new System.Windows.Forms.SplitContainer();
+			this._sourceTextBoxSc = new ScintillaNET.Scintilla();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this._nHibernateTextInstructionsLabel = new System.Windows.Forms.Label();
 			this._nHibernateTextLabel = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this._sqlTopLabel = new System.Windows.Forms.Label();
 			this._sentSqlToClipboardButton = new System.Windows.Forms.Button();
+			this._sqlTextBoxSc = new ScintillaNET.Scintilla();
 			((System.ComponentModel.ISupportInitialize)(this._placeholderGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this._mainSplitContainer)).BeginInit();
 			this._mainSplitContainer.Panel1.SuspendLayout();
@@ -60,26 +60,6 @@
 			this.panel1.SuspendLayout();
 			this._sqlTopPanel.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// _sourceTextBox
-			// 
-			this._sourceTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this._sourceTextBox.Location = new System.Drawing.Point(0, 118);
-			this._sourceTextBox.Name = "_sourceTextBox";
-			this._sourceTextBox.ReadOnly = true;
-			this._sourceTextBox.Size = new System.Drawing.Size(326, 333);
-			this._sourceTextBox.TabIndex = 0;
-			this._sourceTextBox.Text = "";
-			// 
-			// _sqlTextBox
-			// 
-			this._sqlTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this._sqlTextBox.Location = new System.Drawing.Point(0, 117);
-			this._sqlTextBox.Name = "_sqlTextBox";
-			this._sqlTextBox.ReadOnly = true;
-			this._sqlTextBox.Size = new System.Drawing.Size(346, 334);
-			this._sqlTextBox.TabIndex = 1;
-			this._sqlTextBox.Text = "";
 			// 
 			// _placeholderGrid
 			// 
@@ -176,16 +156,24 @@
 			// 
 			// _textEditorsSplitContainer.Panel1
 			// 
-			this._textEditorsSplitContainer.Panel1.Controls.Add(this._sourceTextBox);
+			this._textEditorsSplitContainer.Panel1.Controls.Add(this._sourceTextBoxSc);
 			this._textEditorsSplitContainer.Panel1.Controls.Add(this.panel1);
 			// 
 			// _textEditorsSplitContainer.Panel2
 			// 
-			this._textEditorsSplitContainer.Panel2.Controls.Add(this._sqlTextBox);
+			this._textEditorsSplitContainer.Panel2.Controls.Add(this._sqlTextBoxSc);
 			this._textEditorsSplitContainer.Panel2.Controls.Add(this._sqlTopPanel);
 			this._textEditorsSplitContainer.Size = new System.Drawing.Size(676, 451);
 			this._textEditorsSplitContainer.SplitterDistance = 326;
 			this._textEditorsSplitContainer.TabIndex = 0;
+			// 
+			// _sourceTextBoxSc
+			// 
+			this._sourceTextBoxSc.Dock = System.Windows.Forms.DockStyle.Fill;
+			this._sourceTextBoxSc.Location = new System.Drawing.Point(0, 118);
+			this._sourceTextBoxSc.Name = "_sourceTextBoxSc";
+			this._sourceTextBoxSc.Size = new System.Drawing.Size(326, 333);
+			this._sourceTextBoxSc.TabIndex = 3;
 			// 
 			// panel1
 			// 
@@ -285,6 +273,14 @@
 			this._sentSqlToClipboardButton.UseVisualStyleBackColor = true;
 			this._sentSqlToClipboardButton.Click += new System.EventHandler(this._sentSqlToClipboardButton_Click);
 			// 
+			// _sqlTextBoxSc
+			// 
+			this._sqlTextBoxSc.Dock = System.Windows.Forms.DockStyle.Fill;
+			this._sqlTextBoxSc.Location = new System.Drawing.Point(0, 117);
+			this._sqlTextBoxSc.Name = "_sqlTextBoxSc";
+			this._sqlTextBoxSc.Size = new System.Drawing.Size(346, 334);
+			this._sqlTextBoxSc.TabIndex = 4;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -319,8 +315,6 @@
 
 		#endregion
 
-		private System.Windows.Forms.RichTextBox _sourceTextBox;
-		private System.Windows.Forms.RichTextBox _sqlTextBox;
 		private System.Windows.Forms.DataGridView _placeholderGrid;
 		private System.Windows.Forms.DataGridViewTextBoxColumn _placeholderColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn _valueColumn;
@@ -337,6 +331,8 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label _sqlTopLabel;
 		private System.Windows.Forms.Button _sentSqlToClipboardButton;
+		private ScintillaNET.Scintilla _sourceTextBoxSc;
+		private ScintillaNET.Scintilla _sqlTextBoxSc;
 	}
 }
 
