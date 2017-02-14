@@ -82,20 +82,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Stuff\README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon1.ico" />
+    <Content Include="Stuff\jibernate-demo.gif" />
+    <Content Include="Stuff\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tools\7zip\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>$(ProjectDir)Tools\7zip\7z.exe a -tzip jibernate.zip "$(TargetDir)jibernate.exe" "$(TargetDir)ScintillaNET.dll" "$(ProjectDir)Stuff\LICENSE.txt" "$(ProjectDir)Stuff\README.md"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

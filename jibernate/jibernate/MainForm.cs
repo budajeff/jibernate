@@ -20,7 +20,7 @@ namespace jibernate
 			InitializeComponent();
 			this._placeholderGrid.AutoGenerateColumns = false;
 
-			foreach (var sc in new[] {this._sourceTextBoxSc, this._sqlTextBoxSc })
+			foreach (var sc in new[] { this._sourceTextBoxSc, this._sqlTextBoxSc })
 			{
 				sc.WrapMode = WrapMode.Whitespace;
 				sc.StyleClearAll();
@@ -81,9 +81,9 @@ namespace jibernate
 			{
 				this._placeholderValues = ParserFormatter.ParsePlaceholderValues(this._sourceTextBoxSc.Text);
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				this._sqlTextBoxSc.Text = "Error: Could not parse clipboard text as an NHibernate.SQL log message.";
+				this._sqlTextBoxSc.Text = "Could not parse clipboard text as an NHibernate.SQL log message.";
 				return;
 			}
 
@@ -99,6 +99,27 @@ namespace jibernate
 				((BindingSource)this._placeholderGrid.DataSource).Add(item);
 
 			this._sqlTextBoxSc.Text = ParserFormatter.FormatAsSql(this._sourceTextBoxSc.Text, this._placeholderValues);
+		}
+
+		private void _sourceTextBoxSc_Click(object sender, EventArgs e)
+		{
+			this.ClearHelpText();
+		}
+
+		private bool _textBoxFirstClick = true;
+		private void ClearHelpText()
+		{
+			if (_textBoxFirstClick)
+			{
+				this._sourceTextBoxSc.Text = "";
+				this._sqlTextBoxSc.Text = "";
+				this._textBoxFirstClick = false;
+			}
+		}
+
+		private void _sqlTextBoxSc_MouseClick(object sender, MouseEventArgs e)
+		{
+			this.ClearHelpText();
 		}
 	}
 }
