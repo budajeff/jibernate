@@ -75,7 +75,7 @@
 			this._placeholderGrid.Name = "_placeholderGrid";
 			this._placeholderGrid.RowHeadersVisible = false;
 			this._placeholderGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-			this._placeholderGrid.Size = new System.Drawing.Size(333, 519);
+			this._placeholderGrid.Size = new System.Drawing.Size(329, 515);
 			this._placeholderGrid.TabIndex = 2;
 			this._placeholderGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this._placeholderGrid_CellEndEdit);
 			this._placeholderGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._placeholderGrid_CellFormatting);
@@ -98,6 +98,7 @@
 			// 
 			// _mainSplitContainer
 			// 
+			this._mainSplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this._mainSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this._mainSplitContainer.Location = new System.Drawing.Point(0, 0);
 			this._mainSplitContainer.Name = "_mainSplitContainer";
@@ -112,6 +113,7 @@
 			this._mainSplitContainer.Panel2.Controls.Add(this._textEditorsSplitContainer);
 			this._mainSplitContainer.Size = new System.Drawing.Size(1031, 582);
 			this._mainSplitContainer.SplitterDistance = 333;
+			this._mainSplitContainer.SplitterWidth = 8;
 			this._mainSplitContainer.TabIndex = 1;
 			// 
 			// _placeholdersTopPanel
@@ -123,7 +125,7 @@
 			this._placeholdersTopPanel.Location = new System.Drawing.Point(0, 0);
 			this._placeholdersTopPanel.Name = "_placeholdersTopPanel";
 			this._placeholdersTopPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 15);
-			this._placeholdersTopPanel.Size = new System.Drawing.Size(333, 63);
+			this._placeholdersTopPanel.Size = new System.Drawing.Size(329, 63);
 			this._placeholdersTopPanel.TabIndex = 4;
 			// 
 			// label2
@@ -150,6 +152,7 @@
 			// 
 			// _textEditorsSplitContainer
 			// 
+			this._textEditorsSplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this._textEditorsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this._textEditorsSplitContainer.Location = new System.Drawing.Point(0, 0);
 			this._textEditorsSplitContainer.Name = "_textEditorsSplitContainer";
@@ -164,8 +167,9 @@
 			// 
 			this._textEditorsSplitContainer.Panel2.Controls.Add(this._sqlTextBoxSc);
 			this._textEditorsSplitContainer.Panel2.Controls.Add(this._sqlTopPanel);
-			this._textEditorsSplitContainer.Size = new System.Drawing.Size(694, 582);
+			this._textEditorsSplitContainer.Size = new System.Drawing.Size(690, 582);
 			this._textEditorsSplitContainer.SplitterDistance = 299;
+			this._textEditorsSplitContainer.SplitterWidth = 8;
 			this._textEditorsSplitContainer.TabIndex = 0;
 			// 
 			// _sourceTextBoxSc
@@ -173,7 +177,7 @@
 			this._sourceTextBoxSc.Dock = System.Windows.Forms.DockStyle.Fill;
 			this._sourceTextBoxSc.Location = new System.Drawing.Point(0, 95);
 			this._sourceTextBoxSc.Name = "_sourceTextBoxSc";
-			this._sourceTextBoxSc.Size = new System.Drawing.Size(694, 204);
+			this._sourceTextBoxSc.Size = new System.Drawing.Size(686, 200);
 			this._sourceTextBoxSc.TabIndex = 3;
 			this._sourceTextBoxSc.TextChanged += new System.EventHandler(this._sourceTextBoxSc_TextChanged);
 			// 
@@ -187,7 +191,7 @@
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
 			this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-			this.panel1.Size = new System.Drawing.Size(694, 95);
+			this.panel1.Size = new System.Drawing.Size(686, 95);
 			this.panel1.TabIndex = 2;
 			// 
 			// _nHibernateTextInstructionsLabel
@@ -229,7 +233,7 @@
 			this._sqlTextBoxSc.Dock = System.Windows.Forms.DockStyle.Fill;
 			this._sqlTextBoxSc.Location = new System.Drawing.Point(0, 74);
 			this._sqlTextBoxSc.Name = "_sqlTextBoxSc";
-			this._sqlTextBoxSc.Size = new System.Drawing.Size(694, 205);
+			this._sqlTextBoxSc.Size = new System.Drawing.Size(686, 197);
 			this._sqlTextBoxSc.TabIndex = 4;
 			// 
 			// _sqlTopPanel
@@ -242,12 +246,12 @@
 			this._sqlTopPanel.Location = new System.Drawing.Point(0, 0);
 			this._sqlTopPanel.Name = "_sqlTopPanel";
 			this._sqlTopPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-			this._sqlTopPanel.Size = new System.Drawing.Size(694, 74);
+			this._sqlTopPanel.Size = new System.Drawing.Size(686, 74);
 			this._sqlTopPanel.TabIndex = 3;
 			// 
 			// _prettyPrintButton
 			// 
-			this._prettyPrintButton.Location = new System.Drawing.Point(131, 37);
+			this._prettyPrintButton.Location = new System.Drawing.Point(127, 38);
 			this._prettyPrintButton.Name = "_prettyPrintButton";
 			this._prettyPrintButton.Size = new System.Drawing.Size(75, 23);
 			this._prettyPrintButton.TabIndex = 2;

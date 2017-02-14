@@ -142,14 +142,14 @@ namespace jibernate
 			if (values == null)
 				return "";
 
-			var parts = nHibernateText.Split(new []{";:p0"}, StringSplitOptions.None);
+			var parts = nHibernateText.Split(new[] { ";:p0" }, StringSplitOptions.None);
 			var sqlText = parts[0];
-			
+
 			//remove possible prefixes
 			sqlText = sqlText.Replace("NHibernate.SQL: DEBUG -", "").Trim();
 
 			//replace placeholders in descending order so double digit placeholders don't get replaced by single digit placeholder values
-			foreach(var value in values.OrderByDescending(value => value.Name.Index))
+			foreach (var value in values.OrderByDescending(value => value.Name.Index))
 			{
 				sqlText = sqlText.Replace(value.DisplayName, value.Value);
 			}
@@ -157,16 +157,44 @@ namespace jibernate
 			return sqlText;
 		}
 
+		static bool IsKeyword(IList<string> sqlText, Int32 location, IList<string> keyword)
+		{
+			if (location + keyword.Count >= sqlText.Count)
+				return false;
+			var s = location;
+			var k = 0;
+			while (k < keyword.Count)
+			{
+				if (!string.Equals(sqlText[s], keyword[k], StringComparison.InvariantCultureIgnoreCase))
+					return false;
+				s++;
+				k++;
+			}
+			return true;
+		}
+
 		public static string PrettyPrintSql(string sqlText)
 		{
-			var words = sqlText.Split(new []{' ', '\t'});
-			const string keywords = "select from where having order group join ,"; 
-			var majorKeywords = keywords.Split(' ').Concat(keywords.ToUpperInvariant().Split(' '));
-			
+			var keywords = new List<string[]>();
+ 				keywords.Add(new []{"and"});
+				keywords.Add(new []{"or"});
+				keywords.Add(new []{"select"});
+				keywords.Add(new []{"from"});
+				keywords.Add(new []{"where"});
+				keywords.Add(new []{"having"});
+				keywords.Add(new []{"order", "by"}); 
+				keywords.Add(new []{"group", "by"});
+				keywords.Add(new []{"inner", "join"});
+				keywords.Add(new []{"outer", "join"});
+				keywords.Add(new []{"left", "outer", "join"});
+				keywords.Add(new[] { "cross", "join" });
+
 			var formattedSql = string.Empty;
-			foreach(var word in words)
+			var words = sqlText.Split(new[] { ' ', '\t' });
+			for (var i = 0; i < words.Length; i++)
 			{
-				if(majorKeywords.Contains(word))
+				var word = words[i];
+				if (keywords.Any(keyword => IsKeyword(words, i, keyword)))
 				{
 					formattedSql += Environment.NewLine + Environment.NewLine + word + " ";
 				}
