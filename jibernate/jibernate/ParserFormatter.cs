@@ -27,39 +27,31 @@ namespace jibernate
 	public class PlaceholderValue
 	{
 		public PlaceholderName Name { get; set; }
-		public string DisplayName { get { return ":p" + this.Name.IndexString; } }
+		public string DisplayName { get { return "p" + this.Name.IndexString; } }
 		public string Value { get; set; }
 		public string SourceText { get; set; }
 		public string ValueMetadata { get; set; }
 	}
-	//public class Placeholder
-	//{
-	//	public PlaceholderName Name { get; set; }
-	//	public PlaceholderValue Value { get; set; }
-	//	public string NameForBinding { get { return this.Name.IndexString; } }
-	//	public string ValueForBinding
-	//	{
-	//		get
-	//		{
-	//			return this.Value.Value;
-	//		}
-	//		set { this.Value.Value = value; }
-	//	}
-	//}
 
-	public static class ParserFormatter
+	public class ParserFormatter
 	{
+		readonly char _delimiter;
+		public ParserFormatter(string text)
+		{
+			this._delimiter = text.IndexOf(";:p0") > 0 ? ':' : '@';
+		}
+
 		/// <summary>
 		/// Example input:
 		/// ;:p0 = '1999-01-01' [Type: String (0:0:0)], :p1 = False [Type: Boolean (0:0:0)], :p2 = '1999-01-01' [Type: String (0:0:0)], :p3 = False [Type: Boolean (0:0:0)], :p4 = 5 [Type: Int32 (0:0:0)], :p5 = '58F88EA5D5604750B5B6F82E930AADAC' [Type: String (0:0:0)], :p6 = 0 [Type: Int32 (0:0:0)]";
 		/// </summary>
-		public static IList<PlaceholderValue> ParsePlaceholderValues(string text)
+		public IList<PlaceholderValue> ParsePlaceholderValues(string text)
 		{
 			if (string.IsNullOrWhiteSpace(text))
 				return new List<PlaceholderValue>();
 
-			var parts = text.Trim().Split(new[] { ";:p0" }, StringSplitOptions.None);
-			text = ":p0" + parts[1];
+			var parts = text.Trim().Split(new[] { ";"+_delimiter + "p0" }, StringSplitOptions.None);
+			text = _delimiter+"p0" + parts[1];
 
 			var values = new List<PlaceholderValue>();
 			Int32 i = 0;
@@ -78,7 +70,7 @@ namespace jibernate
 		/// Example input:
 		/// :p1 = False [Type: Boolean (0:0:0)]
 		/// </summary>
-		public static PlaceholderValue ParsePlaceholderValue(string text)
+		public PlaceholderValue ParsePlaceholderValue(string text)
 		{
 			var placeholderValue = new PlaceholderValue { Name = ParsePlaceholderName(text) };
 			if (placeholderValue.Name == null)//no placeholder found in the given text
@@ -112,7 +104,7 @@ namespace jibernate
 		/// Example input:
 		/// :p13 
 		/// </summary>
-		public static PlaceholderName ParsePlaceholderName(string placeholderText)
+		public PlaceholderName ParsePlaceholderName(string placeholderText)
 		{
 			if (string.IsNullOrWhiteSpace(placeholderText) || placeholderText.Length < 3)//min length of placeholder text
 				return null;
@@ -120,7 +112,7 @@ namespace jibernate
 			var i = 0;
 			while (i < placeholderText.Length)
 			{
-				if (placeholderText[i] == ':' && placeholderText[i + 1] == 'p')
+				if (placeholderText[i] == _delimiter && placeholderText[i + 1] == 'p')
 					break;
 				i++;
 			}
@@ -137,12 +129,12 @@ namespace jibernate
 			return name;
 		}
 
-		public static string FormatAsSql(string nHibernateText, IList<PlaceholderValue> values)
+		public string FormatAsSql(string nHibernateText, IList<PlaceholderValue> values)
 		{
 			if (values == null)
 				return "";
 
-			var parts = nHibernateText.Split(new[] { ";:p0" }, StringSplitOptions.None);
+			var parts = nHibernateText.Split(new[] { ";"+_delimiter+"p0" }, StringSplitOptions.None);
 			var sqlText = parts[0];
 
 			//remove possible prefixes
@@ -151,7 +143,7 @@ namespace jibernate
 			//replace placeholders in descending order so double digit placeholders don't get replaced by single digit placeholder values
 			foreach (var value in values.OrderByDescending(value => value.Name.Index))
 			{
-				sqlText = sqlText.Replace(value.DisplayName, value.Value);
+				sqlText = sqlText.Replace(_delimiter+value.DisplayName, value.Value);
 			}
 			sqlText.Trim();
 			return sqlText;
@@ -173,7 +165,7 @@ namespace jibernate
 			return true;
 		}
 
-		public static string PrettyPrintSql(string sqlText)
+		public string PrettyPrintSql(string sqlText)
 		{
 			var keywords = new List<string[]>();
  				keywords.Add(new []{"and"});

@@ -52,12 +52,13 @@ namespace jibernate
 
 		private void _getFromClipboardButton_Click(object sender, EventArgs e)
 		{
+			this.ClearHelpText();
 			this._sourceTextBoxSc.Text = Clipboard.GetText();
 		}
 
 		private void _placeholderGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
 		{
-			this._sqlTextBoxSc.Text = ParserFormatter.FormatAsSql(this._sourceTextBoxSc.Text, this._placeholderValues);
+			this._sqlTextBoxSc.Text = new ParserFormatter(this._sourceTextBoxSc.Text).FormatAsSql(this._sourceTextBoxSc.Text, this._placeholderValues);
 		}
 
 		private void _sentSqlToClipboardButton_Click(object sender, EventArgs e)
@@ -67,7 +68,7 @@ namespace jibernate
 
 		private void _prettyPrintButton_Click(object sender, EventArgs e)
 		{
-			this._sqlTextBoxSc.Text = ParserFormatter.PrettyPrintSql(this._sqlTextBoxSc.Text);
+			this._sqlTextBoxSc.Text = new ParserFormatter(this._sourceTextBoxSc.Text).PrettyPrintSql(this._sqlTextBoxSc.Text);
 		}
 
 		private void _sourceTextBoxSc_TextChanged(object sender, EventArgs e)
@@ -79,7 +80,7 @@ namespace jibernate
 		{
 			try
 			{
-				this._placeholderValues = ParserFormatter.ParsePlaceholderValues(this._sourceTextBoxSc.Text);
+				this._placeholderValues = new ParserFormatter(this._sourceTextBoxSc.Text).ParsePlaceholderValues(this._sourceTextBoxSc.Text);
 			}
 			catch (Exception)
 			{
@@ -98,7 +99,7 @@ namespace jibernate
 			foreach (var item in this._placeholderValues)
 				((BindingSource)this._placeholderGrid.DataSource).Add(item);
 
-			this._sqlTextBoxSc.Text = ParserFormatter.FormatAsSql(this._sourceTextBoxSc.Text, this._placeholderValues);
+			this._sqlTextBoxSc.Text = new ParserFormatter(this._sourceTextBoxSc.Text).FormatAsSql(this._sourceTextBoxSc.Text, this._placeholderValues);
 		}
 
 		private void _sourceTextBoxSc_Click(object sender, EventArgs e)
