@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this._placeholderGrid = new System.Windows.Forms.DataGridView();
 			this._placeholderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,6 +39,8 @@
 			this._textEditorsSplitContainer = new System.Windows.Forms.SplitContainer();
 			this._sourceTextBoxSc = new ScintillaNET.Scintilla();
 			this._logInstructionsPanel = new System.Windows.Forms.Panel();
+			this._prettyPrintLogMessageButton = new System.Windows.Forms.Button();
+			this._convertClipboardButton = new System.Windows.Forms.Button();
 			this._nHibernateTextLabel = new System.Windows.Forms.Label();
 			this._getFromClipboardButton = new System.Windows.Forms.Button();
 			this._sqlTextBoxSc = new ScintillaNET.Scintilla();
@@ -45,6 +48,7 @@
 			this._prettyPrintButton = new System.Windows.Forms.Button();
 			this._sentSqlToClipboardButton = new System.Windows.Forms.Button();
 			this._sqlTopLabel = new System.Windows.Forms.Label();
+			this._covertClipboardTooltip = new System.Windows.Forms.ToolTip(this.components);
 			((System.ComponentModel.ISupportInitialize)(this._placeholderGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this._mainSplitContainer)).BeginInit();
 			this._mainSplitContainer.Panel1.SuspendLayout();
@@ -170,6 +174,8 @@
 			// _logInstructionsPanel
 			// 
 			this._logInstructionsPanel.AutoSize = true;
+			this._logInstructionsPanel.Controls.Add(this._prettyPrintLogMessageButton);
+			this._logInstructionsPanel.Controls.Add(this._convertClipboardButton);
 			this._logInstructionsPanel.Controls.Add(this._nHibernateTextLabel);
 			this._logInstructionsPanel.Controls.Add(this._getFromClipboardButton);
 			this._logInstructionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -177,6 +183,27 @@
 			this._logInstructionsPanel.Name = "_logInstructionsPanel";
 			this._logInstructionsPanel.Size = new System.Drawing.Size(690, 33);
 			this._logInstructionsPanel.TabIndex = 2;
+			// 
+			// _prettyPrintLogMessageButton
+			// 
+			this._prettyPrintLogMessageButton.Location = new System.Drawing.Point(334, 6);
+			this._prettyPrintLogMessageButton.Name = "_prettyPrintLogMessageButton";
+			this._prettyPrintLogMessageButton.Size = new System.Drawing.Size(67, 23);
+			this._prettyPrintLogMessageButton.TabIndex = 3;
+			this._prettyPrintLogMessageButton.Text = "Pretty Print";
+			this._prettyPrintLogMessageButton.UseVisualStyleBackColor = true;
+			this._prettyPrintLogMessageButton.Click += new System.EventHandler(this._prettyPrintLogMessageButton_Click);
+			// 
+			// _convertClipboardButton
+			// 
+			this._convertClipboardButton.Location = new System.Drawing.Point(407, 6);
+			this._convertClipboardButton.Name = "_convertClipboardButton";
+			this._convertClipboardButton.Size = new System.Drawing.Size(102, 23);
+			this._convertClipboardButton.TabIndex = 2;
+			this._convertClipboardButton.Text = "Convert Clipboard";
+			this._covertClipboardTooltip.SetToolTip(this._convertClipboardButton, "Replaces the SQL log message in the Clipboard with SQL");
+			this._convertClipboardButton.UseVisualStyleBackColor = true;
+			this._convertClipboardButton.Click += new System.EventHandler(this.convertClipboard_Click);
 			// 
 			// _nHibernateTextLabel
 			// 
@@ -228,7 +255,7 @@
 			this._prettyPrintButton.TabIndex = 2;
 			this._prettyPrintButton.Text = "Pretty Print";
 			this._prettyPrintButton.UseVisualStyleBackColor = true;
-			this._prettyPrintButton.Click += new System.EventHandler(this._prettyPrintButton_Click);
+			this._prettyPrintButton.Click += new System.EventHandler(this._prettyPrintSqlTextButton_Click);
 			// 
 			// _sentSqlToClipboardButton
 			// 
@@ -250,6 +277,11 @@
 			this._sqlTopLabel.Size = new System.Drawing.Size(36, 22);
 			this._sqlTopLabel.TabIndex = 1;
 			this._sqlTopLabel.Text = "SQL";
+			// 
+			// _covertClipboardTooltip
+			// 
+			this._covertClipboardTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+			this._covertClipboardTooltip.ToolTipTitle = "I\'m Feeling Lucky!";
 			// 
 			// MainForm
 			// 
@@ -298,6 +330,9 @@
 		private ScintillaNET.Scintilla _sourceTextBoxSc;
 		private ScintillaNET.Scintilla _sqlTextBoxSc;
 		private System.Windows.Forms.Button _prettyPrintButton;
+		private System.Windows.Forms.Button _prettyPrintLogMessageButton;
+		private System.Windows.Forms.Button _convertClipboardButton;
+		private System.Windows.Forms.ToolTip _covertClipboardTooltip;
 	}
 }
 

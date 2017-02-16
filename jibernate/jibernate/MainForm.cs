@@ -66,9 +66,14 @@ namespace jibernate
 			Clipboard.SetText(this._sqlTextBoxSc.Text);
 		}
 
-		private void _prettyPrintButton_Click(object sender, EventArgs e)
+		private void _prettyPrintSqlTextButton_Click(object sender, EventArgs e)
 		{
-			this._sqlTextBoxSc.Text = new ParserFormatter(this._sourceTextBoxSc.Text).PrettyPrintSql(this._sqlTextBoxSc.Text);
+			this._sqlTextBoxSc.Text = new ParserFormatter(this._sqlTextBoxSc.Text).PrettyPrintSql(this._sqlTextBoxSc.Text);
+		}
+
+		private void _prettyPrintLogMessageButton_Click(object sender, EventArgs e)
+		{
+			this._sourceTextBoxSc.Text = new ParserFormatter(this._sourceTextBoxSc.Text).PrettyPrintSql(this._sourceTextBoxSc.Text);
 		}
 
 		private void _sourceTextBoxSc_TextChanged(object sender, EventArgs e)
@@ -121,6 +126,15 @@ namespace jibernate
 		private void _sqlTextBoxSc_MouseClick(object sender, MouseEventArgs e)
 		{
 			this.ClearHelpText();
+		}
+
+		private void convertClipboard_Click(object sender, EventArgs e)
+		{
+			this.ClearHelpText();
+			this._sourceTextBoxSc.Text = Clipboard.GetText();
+			this.Reparse();
+			this._sqlTextBoxSc.Text = new ParserFormatter(this._sqlTextBoxSc.Text).PrettyPrintSql(this._sqlTextBoxSc.Text);
+			Clipboard.SetText(this._sqlTextBoxSc.Text);
 		}
 	}
 }
