@@ -64,17 +64,17 @@
 			this._placeholderGrid.AllowUserToAddRows = false;
 			this._placeholderGrid.AllowUserToDeleteRows = false;
 			this._placeholderGrid.AllowUserToResizeRows = false;
-			this._placeholderGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+			this._placeholderGrid.BackgroundColor = System.Drawing.SystemColors.Window;
 			this._placeholderGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this._placeholderGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this._placeholderColumn,
             this._valueColumn});
 			this._placeholderGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-			this._placeholderGrid.Location = new System.Drawing.Point(0, 20);
+			this._placeholderGrid.Location = new System.Drawing.Point(0, 33);
 			this._placeholderGrid.Name = "_placeholderGrid";
 			this._placeholderGrid.RowHeadersVisible = false;
 			this._placeholderGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-			this._placeholderGrid.Size = new System.Drawing.Size(329, 558);
+			this._placeholderGrid.Size = new System.Drawing.Size(329, 545);
 			this._placeholderGrid.TabIndex = 2;
 			this._placeholderGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this._placeholderGrid_CellEndEdit);
 			this._placeholderGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._placeholderGrid_CellFormatting);
@@ -116,22 +116,21 @@
 			// 
 			// _placeholdersTopPanel
 			// 
-			this._placeholdersTopPanel.AutoSize = true;
 			this._placeholdersTopPanel.Controls.Add(this.label3);
 			this._placeholdersTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this._placeholdersTopPanel.Location = new System.Drawing.Point(0, 0);
 			this._placeholdersTopPanel.Name = "_placeholdersTopPanel";
-			this._placeholdersTopPanel.Size = new System.Drawing.Size(329, 20);
+			this._placeholdersTopPanel.Size = new System.Drawing.Size(329, 33);
 			this._placeholdersTopPanel.TabIndex = 4;
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(0, 0);
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(3, 9);
+			this.label3.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(185, 20);
+			this.label3.Size = new System.Drawing.Size(166, 17);
 			this.label3.TabIndex = 1;
 			this.label3.Text = "NHibernate Placeholders";
 			// 
@@ -264,7 +263,6 @@
 			this.Text = "jibernate";
 			((System.ComponentModel.ISupportInitialize)(this._placeholderGrid)).EndInit();
 			this._mainSplitContainer.Panel1.ResumeLayout(false);
-			this._mainSplitContainer.Panel1.PerformLayout();
 			this._mainSplitContainer.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this._mainSplitContainer)).EndInit();
 			this._mainSplitContainer.ResumeLayout(false);
